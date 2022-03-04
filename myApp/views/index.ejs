@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulario</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <main>
+
+      <% if(typeof usuario !='undefined'){ %>
+
+        <p>Hola <%= usuario.nombre %>, elegiste el color <%= usuario.color %>, tu email es: <%= usuario.email %> y tu edad es <%= usuario.edad %></p>
+
+      <% } %>
+ 
+      <form action="/" method="post" class="register-form">
+        <div class="form-control">
+            <label>Nombre de usuario</label>
+            <input type="text" name="nombre" class="control" 
+
+            <%= locals.errors && errors.nombre ? 'is-invalid' : null %>
+							value="<%= locals.oldData ? oldData.nombre : null %>"
+						>
+						<% if (locals.errors && errors.nombre) { %>
+							<div class="text-danger" style="color: red">
+								<%= errors.nombre.msg %>
+							</div>
+						<% } %>
+
+        </div>       
+		<div class="form-control">
+            <label for="color">Elige el color:</label>
+            <select id="color" name="color">
+              <%= locals.errors && errors.color ? 'is-invalid' : null %>>
+							<option value="">Elegí un color</option>
+							<% 
+								let colores = ['Rojo', 'Azul', 'Amarillo', 'Verde'];
+							%>
+							<% for (const color in colores) { %>
+								<option 
+									
+									<%= locals.oldData && (`${color}` == oldData.color) ? "selected" : null %>
+									> 
+										<%= `${colores[color]}` %> 
+								</option>
+							<% } %>
+            </select>
+            <% if (locals.errors && errors.color) { %>
+							<div class="text-danger" style="color: red" style="font-weight: bold">
+								<%= errors.color.msg %>
+							</div>
+						<% } %>
+        </div>
+        <div class="form-control">
+            <label>e-mail</label>
+            <input type="email" name="email" class="control" placeholder="example01@gmail.com"
+            <%= locals.errors && errors.email ? 'is-invalid' : null %>
+            value="<%= locals.oldData ? oldData.email : null %>"
+            >
+						
+						<% if (locals.errors && errors.email) { %>
+							<div class="text-danger" style="color: red">
+								<%= errors.email.msg %>
+							</div>
+						<% } %>
+        </div>
+		<div class="form-control">
+            <label>Edad</label>
+            <input type="number" name="edad" class="control"
+            <%= locals.errors && errors.edad ? 'is-invalid' : null %>
+            value="<%= locals.oldData ? oldData.edad : null %>"
+            >
+						<%= locals.oldData ? oldData.edad : null %>
+				
+						<% if (locals.errors && errors.edad) { %>
+							<div class="text-danger" style="color: red">
+								<%= errors.edad.msg %>
+							</div>
+
+						<% } %>
+        </div>        
+        <button type="submit" class="button">Enviar</button>
+
+    </main>
+  </body>
+</html>
