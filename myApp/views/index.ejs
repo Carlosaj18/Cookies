@@ -4,7 +4,7 @@
     <title>Formulario</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
+  <body <%= typeof cookieColor != 'undefined' ? `style=background-color:${cookieColor}` : "" %>>
 
     <main>
 
@@ -28,24 +28,20 @@
 							</div>
 						<% } %>
 
-        </div>       
+        </div>    
+        
+      
 		<div class="form-control">
-            <label for="color">Elige el color:</label>
-            <select id="color" name="color">
-              <%= locals.errors && errors.color ? 'is-invalid' : null %>>
-							<option value="">Elegí un color</option>
-							<% 
-								let colores = ['Rojo', 'Azul', 'Amarillo', 'Verde'];
-							%>
-							<% for (const color in colores) { %>
-								<option 
-									
-									<%= locals.oldData && (`${color}` == oldData.color) ? "selected" : null %>
-									> 
-										<%= `${colores[color]}` %> 
-								</option>
-							<% } %>
+          <div>
+            <label for="">Seleccione un color</label>
+            <select name="color">
+              <option value="">Elegí un color</option>
+              <option value="yellow">Amarillo</option>
+              <option value="blue">Azul</option>
+              <option value="red">Rojo</option>
+              <option value="green">Verde</option>
             </select>
+          </div>
             <% if (locals.errors && errors.color) { %>
 							<div class="text-danger" style="color: red" style="font-weight: bold">
 								<%= errors.color.msg %>

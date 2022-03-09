@@ -18,17 +18,22 @@ const controllerProducts = {
 
             req.session.nombre = req.body.nombre
             req.session.color = req.body.color
-            console.log(req.body.color);
             req.session.email = req.body.email
             req.session.edad = req.body.edad
 
+            res.cookie('cookieColor', req.body.color);
+            
+            let cookieColor = req.cookies.cookieColor
+
+            console.log("esta es el color de la cookie" + cookieColor);
+            
             let usuario = {
                 nombre: req.session.nombre, 
                 color: req.session.color,
                 email: req.session.email, 
                 edad: req.session.edad
             }
-            return res.render('index', {usuario})
+            return res.render('index', {usuario: usuario, cookieColor: cookieColor});
         }
     }
 }
